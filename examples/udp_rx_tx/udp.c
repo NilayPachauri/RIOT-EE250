@@ -227,6 +227,8 @@ void print_rss(msg_t *msg)
         gnrc_pktsnip_t *snip = gnrc_pktsnip_search_type(pkt, GNRC_NETTYPE_NETIF);
         gnrc_netif_hdr_t *hdr = snip->data;
 
+        printf("RSS Value: %d\n", hdr->rssi - CC2538_RSSI_OFFSET);
+
         /**** TO-DO ****/
 
         /** 
@@ -250,6 +252,7 @@ void print_prr(uint32_t pkt_rcv, uint32_t num_pkts)
      * of packets you actually received. Calculate the Packet Reception Ratio 
      * and print it out 
      */
-    
-
+    printf("Packets Sent: %d", num_pkts);
+    printf("Packets Received: %d", pkt_rcv);
+    printf("Packet Reception Ratio: ", (num_pkts*1.0)/num_pkts);
 }
