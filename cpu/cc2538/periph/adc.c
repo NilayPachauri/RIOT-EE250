@@ -48,6 +48,8 @@ int adc_init(adc_t line)
     // Initialize GPIO Pin to be Output
     gpio_init(GPIO_PIN(PORT_D, 2), GPIO_OUT);
 
+    gpio_clear(GPIO_PIN(PORT_D, 2));
+
     return 0;
 }
 
