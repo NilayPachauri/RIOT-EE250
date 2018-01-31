@@ -62,7 +62,13 @@ int main(void)
 
 
     while (1) {
+        // Sets output port to be on, signifies sampling about to start
+        gpio_set(GPIO_PIN(PORT_D, 2));
+
         sample = adc_sample(ADC_LINE(0), RESOLUTION);
+
+        // Clears output port, signifies sampling is complete
+        gpio_clear(GPIO_PIN(PORT_D, 2));
 
         if (sample < 0) {
             printf("Error: resolution not supported?\n");
