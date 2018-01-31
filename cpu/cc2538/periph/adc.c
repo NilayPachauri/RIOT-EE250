@@ -76,6 +76,11 @@ int adc_sample(adc_t line, adc_res_t res)
     }
 
     cc2538_soc_adc_t *adca = SOC_ADC;
+
+
+    // Sets output port to be on, signifies sampling about to start
+    gpio_set(GPIO_PIN(PORT_D, 2));
+
     /* configure adc line with parameters and trigger a single conversion*/
     uint32_t reg = (adca->ADCCON3) & ~(SOC_ADC_ADCCON3_EREF |
                                        SOC_ADC_ADCCON3_EDIV |
@@ -89,6 +94,10 @@ int adc_sample(adc_t line, adc_res_t res)
     /* Poll/wait until end of conversion */
     while ((adca->cc2538_adc_adccon1.ADCCON1 &
             SOC_ADC_ADCCON1_EOC_MASK) == 0) {}
+
+
+    // Clears output port, signifies sampling is complete
+    gpio_clear(GPIO_PIN(PORT_D, 2));
 
     /* Read result after conversion completed,
      * reading SOC_ADC_ADCH last will clear SOC_ADC_ADCCON1.EOC */
