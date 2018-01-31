@@ -81,8 +81,7 @@ int adc_sample(adc_t line, adc_res_t res)
     cc2538_soc_adc_t *adca = SOC_ADC;
 
 
-    // Sets output port to be on, signifies sampling about to start
-    gpio_set(GPIO_PIN(PORT_D, 2));
+   
 
     /* configure adc line with parameters and trigger a single conversion*/
     uint32_t reg = (adca->ADCCON3) & ~(SOC_ADC_ADCCON3_EREF |
@@ -94,6 +93,9 @@ int adc_sample(adc_t line, adc_res_t res)
     DEBUG("ADCCON1: %"PRIu32" ADCCON2: %"PRIu32" ADCCON3: %"PRIu32"\n",
           adca->cc2538_adc_adccon1.ADCCON1, adca->ADCCON2, adca->ADCCON3);
 
+     // Sets output port to be on, signifies sampling about to start
+    gpio_set(GPIO_PIN(PORT_D, 2));
+    
     /* Poll/wait until end of conversion */
     while ((adca->cc2538_adc_adccon1.ADCCON1 &
             SOC_ADC_ADCCON1_EOC_MASK) == 0) {}
