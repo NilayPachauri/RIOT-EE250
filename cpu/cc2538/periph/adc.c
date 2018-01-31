@@ -25,6 +25,7 @@
 #include "periph_conf.h"
 #include "periph_cpu.h"
 #include "periph/adc.h"
+#include "periph/gpio.h"
 
 #define ENABLE_DEBUG (0)
 #include "debug.h"
@@ -95,7 +96,7 @@ int adc_sample(adc_t line, adc_res_t res)
 
      // Sets output port to be on, signifies sampling about to start
     gpio_set(GPIO_PIN(PORT_D, 2));
-    
+
     /* Poll/wait until end of conversion */
     while ((adca->cc2538_adc_adccon1.ADCCON1 &
             SOC_ADC_ADCCON1_EOC_MASK) == 0) {}
