@@ -57,9 +57,6 @@ int main(void)
         printf("Successfully initialized ADC_LINE(0)\n");
     }
 
-    // Initialize GPIO Pin to be Output
-    gpio_init(GPIO_PIN(PORT_D, 2), GPIO_OUT);
-
     while (1) {
 
         sample = adc_sample(ADC_LINE(0), RESOLUTION);

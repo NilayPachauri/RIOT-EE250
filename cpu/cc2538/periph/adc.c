@@ -44,6 +44,9 @@ int adc_init(adc_t line)
     /* configure ADC GPIO as analog input */
     gpio_init(adc_config[line], GPIO_IN_ANALOG);
 
+    // Initialize GPIO Pin to be Output
+    gpio_init(GPIO_PIN(PORT_D, 2), GPIO_OUT);
+
     return 0;
 }
 
